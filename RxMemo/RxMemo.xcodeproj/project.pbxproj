@@ -26,6 +26,10 @@
 		785AEE052CEE450B0084B413 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE042CEE450B0084B413 /* DetailViewModel.swift */; };
 		785AEE072CEE452F0084B413 /* ComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE062CEE452F0084B413 /* ComposeViewModel.swift */; };
 		785AEE092CEE45710084B413 /* ViewModelBindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE082CEE45710084B413 /* ViewModelBindableType.swift */; };
+		785AEE0B2CF0C2E70084B413 /* TransitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE0A2CF0C2E70084B413 /* TransitionModel.swift */; };
+		785AEE0D2CF0C3AA0084B413 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE0C2CF0C3AA0084B413 /* Scene.swift */; };
+		785AEE0F2CF0C7CE0084B413 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE0E2CF0C7CE0084B413 /* SceneCoordinatorType.swift */; };
+		785AEE112CF0C8E80084B413 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE102CF0C8E80084B413 /* SceneCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		785AEE042CEE450B0084B413 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		785AEE062CEE452F0084B413 /* ComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewModel.swift; sourceTree = "<group>"; };
 		785AEE082CEE45710084B413 /* ViewModelBindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindableType.swift; sourceTree = "<group>"; };
+		785AEE0A2CF0C2E70084B413 /* TransitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionModel.swift; sourceTree = "<group>"; };
+		785AEE0C2CF0C3AA0084B413 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		785AEE0E2CF0C7CE0084B413 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
+		785AEE102CF0C8E80084B413 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +146,10 @@
 		785AEDF52CEE22BA0084B413 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				785AEE0A2CF0C2E70084B413 /* TransitionModel.swift */,
+				785AEE0C2CF0C3AA0084B413 /* Scene.swift */,
+				785AEE0E2CF0C7CE0084B413 /* SceneCoordinatorType.swift */,
+				785AEE102CF0C8E80084B413 /* SceneCoordinator.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -240,14 +252,18 @@
 			files = (
 				785AEE032CEE44DF0084B413 /* ListViewModel.swift in Sources */,
 				785AEE012CEE3AA60084B413 /* ComposeViewController.swift in Sources */,
+				785AEE0D2CF0C3AA0084B413 /* Scene.swift in Sources */,
 				785AEDD52CECCA340084B413 /* ListViewController.swift in Sources */,
 				785AEE092CEE45710084B413 /* ViewModelBindableType.swift in Sources */,
 				785AEE072CEE452F0084B413 /* ComposeViewModel.swift in Sources */,
 				785AEDFD2CEE285E0084B413 /* MemoryStorage.swift in Sources */,
 				785AEDD12CECCA340084B413 /* AppDelegate.swift in Sources */,
 				785AEDD32CECCA340084B413 /* SceneDelegate.swift in Sources */,
+				785AEE0F2CF0C7CE0084B413 /* SceneCoordinatorType.swift in Sources */,
 				785AEDF92CEE26CB0084B413 /* MemoStorageType.swift in Sources */,
+				785AEE112CF0C8E80084B413 /* SceneCoordinator.swift in Sources */,
 				785AEDDB2CECCA340084B413 /* RxMemo.xcdatamodeld in Sources */,
+				785AEE0B2CF0C2E70084B413 /* TransitionModel.swift in Sources */,
 				785AEDF72CEE25230084B413 /* Memo.swift in Sources */,
 				785AEE052CEE450B0084B413 /* DetailViewModel.swift in Sources */,
 				785AEDFF2CEE337D0084B413 /* DetailViewController.swift in Sources */,
