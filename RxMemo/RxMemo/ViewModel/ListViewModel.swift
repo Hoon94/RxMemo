@@ -6,7 +6,14 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
-class ListViewModel {
+class ListViewModel: CommonViewModel {
     
+    // MARK: - Properties
+    
+    var memoList: Observable<[Memo]> {
+        return storage.memoList()
+    }
 }
