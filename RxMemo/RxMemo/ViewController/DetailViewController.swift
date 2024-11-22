@@ -7,7 +7,11 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, ViewModelBindableType {
+    
+    // MARK: - Properties
+    
+    var viewModel: DetailViewModel!
         
     // MARK: - Lifecycle
     
@@ -18,6 +22,10 @@ class DetailViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    func bindViewModel() {
+        
+    }
     
     private func addNavigationBar() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

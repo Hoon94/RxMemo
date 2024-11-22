@@ -7,14 +7,24 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
-
+class ComposeViewController: UIViewController, ViewModelBindableType {
+    
+    // MARK: - Properties
+    
+    var viewModel: ComposeViewModel!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationItem.title = "새 메모"
+    }
+    
+    // MARK: - Helpers
+    
+    func bindViewModel() {
+        
     }
 }
 

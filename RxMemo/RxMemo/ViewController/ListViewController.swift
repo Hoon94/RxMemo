@@ -7,14 +7,24 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
-
+class ListViewController: UIViewController, ViewModelBindableType {
+    
+    // MARK: - Properties
+    
+    var viewModel: ListViewModel!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationItem.title = "메모 목록"
+    }
+    
+    // MARK: - Helpers
+    
+    func bindViewModel() {
+        
     }
 }
 
