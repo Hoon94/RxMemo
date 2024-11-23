@@ -35,6 +35,7 @@
 		785AEE182CF0E5100084B413 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE172CF0E5100084B413 /* SnapKit-Dynamic */; };
 		785AEE1B2CF0E5290084B413 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE1A2CF0E5290084B413 /* Then */; };
 		785AEE1E2CF0E9240084B413 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE1D2CF0E9240084B413 /* NSObject-Rx */; };
+		785AEE212CF208890084B413 /* Action in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE202CF208890084B413 /* Action */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 			files = (
 				785AEDEB2CECCAD80084B413 /* RxSwift in Frameworks */,
 				785AEDF02CECCCCE0084B413 /* RxDataSources in Frameworks */,
+				785AEE212CF208890084B413 /* Action in Frameworks */,
 				785AEE1E2CF0E9240084B413 /* NSObject-Rx in Frameworks */,
 				785AEDEE2CECCCCE0084B413 /* Differentiator in Frameworks */,
 				785AEE1B2CF0E5290084B413 /* Then in Frameworks */,
@@ -206,6 +208,7 @@
 				785AEE172CF0E5100084B413 /* SnapKit-Dynamic */,
 				785AEE1A2CF0E5290084B413 /* Then */,
 				785AEE1D2CF0E9240084B413 /* NSObject-Rx */,
+				785AEE202CF208890084B413 /* Action */,
 			);
 			productName = RxMemo;
 			productReference = 785AEDCD2CECCA340084B413 /* RxMemo.app */;
@@ -241,6 +244,7 @@
 				785AEE142CF0E5100084B413 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				785AEE192CF0E5290084B413 /* XCRemoteSwiftPackageReference "Then" */,
 				785AEE1C2CF0E9240084B413 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
+				785AEE1F2CF208890084B413 /* XCRemoteSwiftPackageReference "Action" */,
 			);
 			productRefGroup = 785AEDCE2CECCA340084B413 /* Products */;
 			projectDirPath = "";
@@ -540,6 +544,14 @@
 				minimumVersion = 5.2.2;
 			};
 		};
+		785AEE1F2CF208890084B413 /* XCRemoteSwiftPackageReference "Action" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/Action";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -582,6 +594,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 785AEE1C2CF0E9240084B413 /* XCRemoteSwiftPackageReference "NSObject-Rx" */;
 			productName = "NSObject-Rx";
+		};
+		785AEE202CF208890084B413 /* Action */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785AEE1F2CF208890084B413 /* XCRemoteSwiftPackageReference "Action" */;
+			productName = Action;
 		};
 /* End XCSwiftPackageProductDependency section */
 

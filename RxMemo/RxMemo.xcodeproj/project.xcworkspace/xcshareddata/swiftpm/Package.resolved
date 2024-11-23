@@ -1,6 +1,15 @@
 {
-  "originHash" : "b3d099d31f076b452d765587d90ecc9aa0973b844ce609820b4ad05e5e8966ac",
+  "originHash" : "766a00fd16c79a28a3d1a5a436d3f4264724c4b9a162e0d5687ef6643fd3a222",
   "pins" : [
+    {
+      "identity" : "action",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/Action",
+      "state" : {
+        "revision" : "55f5da064fd66cb09acde22cbbb744fe7f6355aa",
+        "version" : "5.0.0"
+      }
+    },
     {
       "identity" : "nsobject-rx",
       "kind" : "remoteSourceControl",
