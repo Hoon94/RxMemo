@@ -5,6 +5,8 @@
 //  Created by Daehoon Lee on 11/21/24.
 //
 
+import SnapKit
+import Then
 import UIKit
 
 class DetailViewController: UIViewController, ViewModelBindableType {
@@ -12,19 +14,58 @@ class DetailViewController: UIViewController, ViewModelBindableType {
     // MARK: - Properties
     
     var viewModel: DetailViewModel!
-        
+    
+    private let tableView = UITableView().then {
+        $0.register(UITableViewCell.self, forCellReuseIdentifier: "contentCell")
+        $0.register(UITableViewCell.self, forCellReuseIdentifier: "dateCell")
+        $0.allowsSelection = false
+        $0.separatorStyle = .none
+    }
+    
+    private let contentCell = UITableViewCell(style: .default, reuseIdentifier: "contentCell").then {
+        var content = $0.defaultContentConfiguration()
+        content.textProperties.numberOfLines = 0
+        content.textProperties.lineBreakMode = .byWordWrapping
+        $0.contentConfiguration = content
+    }
+    
+    private let dateCell = UITableViewCell(style: .default, reuseIdentifier: "dateCell").then {
+        var content = $0.defaultContentConfiguration()
+        content.textProperties.color = .secondaryLabel
+        content.textProperties.alignment = .center
+        $0.contentConfiguration = content
+    }
+    
+    private let deleteButton = UIBarButtonItem(systemItem: .trash).then {
+        $0.tintColor = .red
+    }
+    
+    private let editButton = UIBarButtonItem(systemItem: .compose)
+    private let shareButton = UIBarButtonItem(systemItem: .action)
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        addNavigationBar()
+        configureLayout()
     }
     
     // MARK: - Helpers
     
     func bindViewModel() {
         
+    }
+    
+    private func configureLayout() {
+        addNavigationBar()
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.directionalEdges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        addToolBar()
     }
     
     private func addNavigationBar() {
@@ -43,10 +84,18 @@ class DetailViewController: UIViewController, ViewModelBindableType {
         
         view.addSubview(navigationBar)
     }
+    
+    private func addToolBar() {
+        navigationController?.isToolbarHidden = false
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolbarItems = [deleteButton, flexibleSpace, editButton, flexibleSpace, shareButton]
+    }
 }
 
 // MARK: - Preview
 
 #Preview {
-    DetailViewController()
+    UINavigationController(rootViewController: DetailViewController())
 }
