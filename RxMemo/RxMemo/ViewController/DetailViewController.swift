@@ -5,6 +5,7 @@
 //  Created by Daehoon Lee on 11/21/24.
 //
 
+import NSObject_Rx
 import SnapKit
 import Then
 import UIKit
@@ -54,7 +55,34 @@ class DetailViewController: UIViewController, ViewModelBindableType {
     // MARK: - Helpers
     
     func bindViewModel() {
+        viewModel.title
+            .drive(navigationItem.rx.title)
+            .disposed(by: rx.disposeBag)
         
+        viewModel.contents
+            .bind(to: tableView.rx.items) { tableView, row, value in
+                switch row {
+                case 0:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "contentCell") else { return UITableViewCell() }
+                    
+                    var content = cell.defaultContentConfiguration()
+                    content.text = value
+                    cell.contentConfiguration = content
+                    
+                    return cell
+                case 1:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell") else { return UITableViewCell() }
+                    
+                    var content = cell.defaultContentConfiguration()
+                    content.text = value
+                    cell.contentConfiguration = content
+                    
+                    return cell
+                default:
+                    fatalError()
+                }
+            }
+            .disposed(by: rx.disposeBag)
     }
     
     private func configureLayout() {
