@@ -18,7 +18,7 @@ class ListViewController: UIViewController, ViewModelBindableType {
     
     var viewModel: ListViewModel!
     
-    private let addButton = UIBarButtonItem(systemItem: .add)
+    private var addButton = UIBarButtonItem(systemItem: .add)
     
     private let tableView = UITableView().then {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -51,6 +51,8 @@ class ListViewController: UIViewController, ViewModelBindableType {
                 cell.contentConfiguration = content
             }
             .disposed(by: rx.disposeBag)
+        
+        addButton.rx.action = viewModel.makeCreateAction()
     }
     
     private func configureLayout() {
