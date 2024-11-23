@@ -31,6 +31,10 @@
 		785AEE0F2CF0C7CE0084B413 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE0E2CF0C7CE0084B413 /* SceneCoordinatorType.swift */; };
 		785AEE112CF0C8E80084B413 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE102CF0C8E80084B413 /* SceneCoordinator.swift */; };
 		785AEE132CF0CEF60084B413 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE122CF0CEF60084B413 /* CommonViewModel.swift */; };
+		785AEE162CF0E5100084B413 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE152CF0E5100084B413 /* SnapKit */; };
+		785AEE182CF0E5100084B413 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE172CF0E5100084B413 /* SnapKit-Dynamic */; };
+		785AEE1B2CF0E5290084B413 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE1A2CF0E5290084B413 /* Then */; };
+		785AEE1E2CF0E9240084B413 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE1D2CF0E9240084B413 /* NSObject-Rx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,8 +69,12 @@
 			files = (
 				785AEDEB2CECCAD80084B413 /* RxSwift in Frameworks */,
 				785AEDF02CECCCCE0084B413 /* RxDataSources in Frameworks */,
+				785AEE1E2CF0E9240084B413 /* NSObject-Rx in Frameworks */,
 				785AEDEE2CECCCCE0084B413 /* Differentiator in Frameworks */,
+				785AEE1B2CF0E5290084B413 /* Then in Frameworks */,
 				785AEDE92CECCAD80084B413 /* RxCocoa in Frameworks */,
+				785AEE162CF0E5100084B413 /* SnapKit in Frameworks */,
+				785AEE182CF0E5100084B413 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +202,10 @@
 				785AEDEA2CECCAD80084B413 /* RxSwift */,
 				785AEDED2CECCCCE0084B413 /* Differentiator */,
 				785AEDEF2CECCCCE0084B413 /* RxDataSources */,
+				785AEE152CF0E5100084B413 /* SnapKit */,
+				785AEE172CF0E5100084B413 /* SnapKit-Dynamic */,
+				785AEE1A2CF0E5290084B413 /* Then */,
+				785AEE1D2CF0E9240084B413 /* NSObject-Rx */,
 			);
 			productName = RxMemo;
 			productReference = 785AEDCD2CECCA340084B413 /* RxMemo.app */;
@@ -226,6 +238,9 @@
 			packageReferences = (
 				785AEDE72CECCAD80084B413 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				785AEDEC2CECCCCE0084B413 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				785AEE142CF0E5100084B413 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				785AEE192CF0E5290084B413 /* XCRemoteSwiftPackageReference "Then" */,
+				785AEE1C2CF0E9240084B413 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
 			);
 			productRefGroup = 785AEDCE2CECCA340084B413 /* Products */;
 			projectDirPath = "";
@@ -501,6 +516,30 @@
 				minimumVersion = 5.0.2;
 			};
 		};
+		785AEE142CF0E5100084B413 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		785AEE192CF0E5290084B413 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		785AEE1C2CF0E9240084B413 /* XCRemoteSwiftPackageReference "NSObject-Rx" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/NSObject-Rx.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -523,6 +562,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 785AEDEC2CECCCCE0084B413 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		785AEE152CF0E5100084B413 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785AEE142CF0E5100084B413 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		785AEE172CF0E5100084B413 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785AEE142CF0E5100084B413 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		785AEE1A2CF0E5290084B413 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785AEE192CF0E5290084B413 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		785AEE1D2CF0E9240084B413 /* NSObject-Rx */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785AEE1C2CF0E9240084B413 /* XCRemoteSwiftPackageReference "NSObject-Rx" */;
+			productName = "NSObject-Rx";
 		};
 /* End XCSwiftPackageProductDependency section */
 

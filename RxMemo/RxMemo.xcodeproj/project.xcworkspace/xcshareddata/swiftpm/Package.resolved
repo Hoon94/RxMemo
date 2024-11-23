@@ -1,6 +1,15 @@
 {
-  "originHash" : "d9f13a30b16af1eebc2641597f741943833bff0e550bd37d6e3fcc53043bd036",
+  "originHash" : "b3d099d31f076b452d765587d90ecc9aa0973b844ce609820b4ad05e5e8966ac",
   "pins" : [
+    {
+      "identity" : "nsobject-rx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/NSObject-Rx.git",
+      "state" : {
+        "revision" : "6134a640808db7390d3dfcb32ef5f0a12b7a644d",
+        "version" : "5.2.2"
+      }
+    },
     {
       "identity" : "rxdatasources",
       "kind" : "remoteSourceControl",
@@ -17,6 +26,24 @@
       "state" : {
         "revision" : "c7c7d2cf50a3211fe2843f76869c698e4e417930",
         "version" : "6.8.0"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit.git",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "then",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/devxoul/Then.git",
+      "state" : {
+        "revision" : "d41ef523faef0f911369f79c0b96815d9dbb6d7a",
+        "version" : "3.0.0"
       }
     }
   ],

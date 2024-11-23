@@ -21,6 +21,7 @@ extension Scene {
             listViewController.bind(viewModel: listViewModel)
             
             let listNavigationController = UINavigationController(rootViewController: listViewController)
+            listNavigationController.navigationBar.prefersLargeTitles = true
             
             return listNavigationController
         case .detail(let detailViewModel):

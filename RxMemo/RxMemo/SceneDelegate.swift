@@ -15,11 +15,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let listNavigationController = UINavigationController(rootViewController: ListViewController())
-        listNavigationController.navigationBar.prefersLargeTitles = true
-        
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = listNavigationController
+        
+        let coordinator = SceneCoordinator(window: window ?? UIWindow())
+        let storage = MemoryStorage()
+        let listViewModel = ListViewModel(title: "나의 메모", sceneCoordinator: coordinator, storage: storage)
+        let listScene = Scene.list(listViewModel)
+        
+        coordinator.transition(to: listScene, using: .root, animated: false)
         window?.makeKeyAndVisible()
     }
 
