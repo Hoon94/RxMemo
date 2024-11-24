@@ -9,6 +9,12 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+extension UIViewController {
+    var sceneViewController: UIViewController {
+        return self.children.last ?? self
+    }
+}
+
 class SceneCoordinator: SceneCoordinatorType {
     
     // MARK: - Properties
@@ -34,7 +40,7 @@ class SceneCoordinator: SceneCoordinatorType {
         
         switch style {
         case .root:
-            currentViewController = target
+            currentViewController = target.sceneViewController
             window.rootViewController = target
             
             subject.onCompleted()
@@ -44,8 +50,15 @@ class SceneCoordinator: SceneCoordinatorType {
                 break
             }
             
+            navigationController.rx.willShow
+                .withUnretained(self)
+                .subscribe(onNext: { coordinator, event in
+                    coordinator.currentViewController = event.viewController.sceneViewController
+                })
+                .disposed(by: disposeBag)
+            
             navigationController.pushViewController(target, animated: animated)
-            currentViewController = target
+            currentViewController = target.sceneViewController
             
             subject.onCompleted()
         case .modal:
@@ -53,7 +66,7 @@ class SceneCoordinator: SceneCoordinatorType {
                 subject.onCompleted()
             }
             
-            currentViewController = target
+            currentViewController = target.sceneViewController
         }
         
         return subject.asCompletable()
@@ -64,7 +77,7 @@ class SceneCoordinator: SceneCoordinatorType {
         return Completable.create { [unowned self] completable in
             if let presentingViewController = self.currentViewController.presentingViewController {
                 self.currentViewController.dismiss(animated: animated) {
-                    self.currentViewController = presentingViewController
+                    self.currentViewController = presentingViewController.sceneViewController
                     completable(.completed)
                 }
             } else if let navigationController = self.currentViewController.navigationController {
@@ -73,7 +86,7 @@ class SceneCoordinator: SceneCoordinatorType {
                     return Disposables.create()
                 }
                 
-                self.currentViewController = navigationController.viewControllers.last ?? UIViewController()
+                self.currentViewController = navigationController.viewControllers.last?.sceneViewController ?? UIViewController()
                 completable(.completed)
             } else {
                 completable(.error(TransitionError.unknown))

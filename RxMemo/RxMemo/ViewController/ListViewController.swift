@@ -24,9 +24,7 @@ class ListViewController: UIViewController, ViewModelBindableType {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-    private let cell = UITableViewCell(style: .default, reuseIdentifier: "cell").then {
-        $0.accessoryType = .disclosureIndicator
-    }
+    private let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
     
     // MARK: - Lifecycle
     
@@ -49,10 +47,20 @@ class ListViewController: UIViewController, ViewModelBindableType {
                 var content = cell.defaultContentConfiguration()
                 content.text = memo.content
                 cell.contentConfiguration = content
+                cell.accessoryType = .disclosureIndicator
             }
             .disposed(by: rx.disposeBag)
         
         addButton.rx.action = viewModel.makeCreateAction()
+        
+        Observable.zip(tableView.rx.modelSelected(Memo.self), tableView.rx.itemSelected)
+            .withUnretained(self)
+            .do(onNext: { viewController, data in
+                viewController.tableView.deselectRow(at: data.1, animated: true)
+            })
+            .map { $1.0 }
+            .bind(to: viewModel.detailAction.inputs)
+            .disposed(by: rx.disposeBag)
     }
     
     private func configureLayout() {

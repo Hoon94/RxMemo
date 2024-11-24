@@ -23,19 +23,8 @@ class DetailViewController: UIViewController, ViewModelBindableType {
         $0.separatorStyle = .none
     }
     
-    private let contentCell = UITableViewCell(style: .default, reuseIdentifier: "contentCell").then {
-        var content = $0.defaultContentConfiguration()
-        content.textProperties.numberOfLines = 0
-        content.textProperties.lineBreakMode = .byWordWrapping
-        $0.contentConfiguration = content
-    }
-    
-    private let dateCell = UITableViewCell(style: .default, reuseIdentifier: "dateCell").then {
-        var content = $0.defaultContentConfiguration()
-        content.textProperties.color = .secondaryLabel
-        content.textProperties.alignment = .center
-        $0.contentConfiguration = content
-    }
+    private let contentCell = UITableViewCell(style: .default, reuseIdentifier: "contentCell")
+    private let dateCell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
     
     private let deleteButton = UIBarButtonItem(systemItem: .trash).then {
         $0.tintColor = .red
@@ -67,6 +56,8 @@ class DetailViewController: UIViewController, ViewModelBindableType {
                     
                     var content = cell.defaultContentConfiguration()
                     content.text = value
+                    content.textProperties.numberOfLines = 0
+                    content.textProperties.lineBreakMode = .byWordWrapping
                     cell.contentConfiguration = content
                     
                     return cell
@@ -75,6 +66,8 @@ class DetailViewController: UIViewController, ViewModelBindableType {
                     
                     var content = cell.defaultContentConfiguration()
                     content.text = value
+                    content.textProperties.color = .secondaryLabel
+                    content.textProperties.alignment = .center
                     cell.contentConfiguration = content
                     
                     return cell
