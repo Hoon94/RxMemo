@@ -7,6 +7,7 @@
 
 import Action
 import Foundation
+import NSObject_Rx
 import RxCocoa
 import RxSwift
 import Then
@@ -36,5 +37,29 @@ class DetailViewModel: CommonViewModel {
         ])
         
         super.init(title: title, sceneCoordinator: sceneCoordinator, storage: storage)
+    }
+    
+    // MARK: - Helpers
+    
+    func makeEditAction() -> CocoaAction {
+        return CocoaAction { [unowned self] _ in
+            let composeViewModel = ComposeViewModel(title: "메모 편집", content: self.memo.content, sceneCoordinator: self.sceneCoordinator, storage: self.storage, saveAction: self.performUpdate(memo: self.memo))
+            let composeScene = Scene.compose(composeViewModel)
+            
+            return self.sceneCoordinator.transition(to: composeScene, using: .modal, animated: true)
+                .asObservable()
+                .map { _ in }
+        }
+    }
+    
+    private func performUpdate(memo: Memo) -> Action<String, Void> {
+        return Action { [unowned self] input in
+            self.storage.update(memo: memo, content: input)
+                .map { [$0.content, self.formatter.string(from: $0.insertDate)] }
+                .bind(onNext: { self.contents.onNext($0) })
+                .disposed(by: self.rx.disposeBag)
+            
+            return Observable.empty()
+        }
     }
 }

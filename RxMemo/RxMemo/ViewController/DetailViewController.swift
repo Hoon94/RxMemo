@@ -30,7 +30,7 @@ class DetailViewController: UIViewController, ViewModelBindableType {
         $0.tintColor = .red
     }
     
-    private let editButton = UIBarButtonItem(systemItem: .compose)
+    private var editButton = UIBarButtonItem(systemItem: .compose)
     private let shareButton = UIBarButtonItem(systemItem: .action)
     
     // MARK: - Lifecycle
@@ -76,34 +76,17 @@ class DetailViewController: UIViewController, ViewModelBindableType {
                 }
             }
             .disposed(by: rx.disposeBag)
+        
+        editButton.rx.action = viewModel.makeEditAction()
     }
     
     private func configureLayout() {
-        addNavigationBar()
-        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.directionalEdges.equalTo(view.safeAreaLayoutGuide)
         }
         
         addToolBar()
-    }
-    
-    private func addNavigationBar() {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first
-        else { return }
-        
-        let statusBarHeight = window.safeAreaInsets.top
-        
-        let navigationBar = UINavigationBar(frame: .init(x: 0, y: statusBarHeight, width: view.frame.width, height: statusBarHeight))
-        navigationBar.isTranslucent = false
-        navigationBar.shadowImage = UIImage()
-        
-        let navigationItem = UINavigationItem(title: "메모 보기")
-        navigationBar.items = [navigationItem]
-        
-        view.addSubview(navigationBar)
     }
     
     private func addToolBar() {
@@ -118,5 +101,8 @@ class DetailViewController: UIViewController, ViewModelBindableType {
 // MARK: - Preview
 
 #Preview {
-    UINavigationController(rootViewController: DetailViewController())
+    let navigationController = UINavigationController(rootViewController: DetailViewController())
+    navigationController.isToolbarHidden = false
+    
+    return navigationController
 }

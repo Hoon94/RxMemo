@@ -58,6 +58,7 @@ class SceneCoordinator: SceneCoordinatorType {
                 .disposed(by: disposeBag)
             
             navigationController.pushViewController(target, animated: animated)
+            navigationController.isToolbarHidden = false
             currentViewController = target.sceneViewController
             
             subject.onCompleted()
