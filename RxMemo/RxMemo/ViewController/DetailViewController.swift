@@ -29,7 +29,7 @@ class DetailViewController: UIViewController, ViewModelBindableType {
     private let contentCell = UITableViewCell(style: .default, reuseIdentifier: "contentCell")
     private let dateCell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
     
-    private let deleteButton = UIBarButtonItem(systemItem: .trash).then {
+    private var deleteButton = UIBarButtonItem(systemItem: .trash).then {
         $0.tintColor = .red
     }
     
@@ -79,6 +79,8 @@ class DetailViewController: UIViewController, ViewModelBindableType {
                 }
             }
             .disposed(by: rx.disposeBag)
+        
+        deleteButton.rx.action = viewModel.makeDeleteAction()
         
         editButton.rx.action = viewModel.makeEditAction()
         

@@ -29,6 +29,13 @@ class ListViewModel: CommonViewModel {
         }
     }()
     
+    lazy var deleteAction: Action<Memo, Void> = {
+        return Action { [unowned self] memo in
+            return self.storage.delete(memo: memo)
+                .map { _ in }
+        }
+    }()
+    
     // MARK: - Helpers
     
     func makeCreateAction() -> CocoaAction {

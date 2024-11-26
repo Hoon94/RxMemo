@@ -41,6 +41,16 @@ class DetailViewModel: CommonViewModel {
     
     // MARK: - Helpers
     
+    func makeDeleteAction() -> CocoaAction {
+        return Action { input in
+            self.storage.delete(memo: self.memo)
+            
+            return self.sceneCoordinator.close(animated: true)
+                .asObservable()
+                .map { _ in }
+        }
+    }
+    
     func makeEditAction() -> CocoaAction {
         return CocoaAction { [unowned self] _ in
             let composeViewModel = ComposeViewModel(title: "메모 편집", content: self.memo.content, sceneCoordinator: self.sceneCoordinator, storage: self.storage, saveAction: self.performUpdate(memo: self.memo))
