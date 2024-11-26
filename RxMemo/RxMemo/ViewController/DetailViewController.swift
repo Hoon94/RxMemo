@@ -5,7 +5,10 @@
 //  Created by Daehoon Lee on 11/21/24.
 //
 
+import Action
 import NSObject_Rx
+import RxCocoa
+import RxSwift
 import SnapKit
 import Then
 import UIKit
@@ -78,6 +81,17 @@ class DetailViewController: UIViewController, ViewModelBindableType {
             .disposed(by: rx.disposeBag)
         
         editButton.rx.action = viewModel.makeEditAction()
+        
+        shareButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { viewController, _ in
+                let memo = viewController.viewModel.memo.content
+                
+                let activityViewController = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
+                viewController.present(activityViewController, animated: true)
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     private func configureLayout() {
