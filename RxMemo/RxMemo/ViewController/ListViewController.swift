@@ -8,6 +8,7 @@
 import Action
 import NSObject_Rx
 import RxCocoa
+import RxDataSources
 import RxSwift
 import SnapKit
 import Then
@@ -27,6 +28,20 @@ class ListViewController: UIViewController, ViewModelBindableType {
     
     private let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
     
+    private let dataSource = RxTableViewSectionedAnimatedDataSource<MemoSectionModel>(configureCell: { dataSource, tableView, indexPath, memo -> UITableViewCell in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        content.text = memo.content
+        cell.contentConfiguration = content
+        cell.accessoryType = .disclosureIndicator
+        
+        return cell
+    }).then {
+        $0.canEditRowAtIndexPath = { dataSource, index in
+            return true
+        }
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -44,12 +59,7 @@ class ListViewController: UIViewController, ViewModelBindableType {
             .disposed(by: rx.disposeBag)
         
         viewModel.memoList
-            .bind(to: tableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
-                var content = cell.defaultContentConfiguration()
-                content.text = memo.content
-                cell.contentConfiguration = content
-                cell.accessoryType = .disclosureIndicator
-            }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
         addButton.rx.action = viewModel.makeCreateAction()

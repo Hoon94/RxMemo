@@ -8,13 +8,16 @@
 import Action
 import Foundation
 import RxCocoa
+import RxDataSources
 import RxSwift
+
+typealias MemoSectionModel = AnimatableSectionModel<Int, Memo>
 
 class ListViewModel: CommonViewModel {
     
     // MARK: - Properties
     
-    var memoList: Observable<[Memo]> {
+    var memoList: Observable<[MemoSectionModel]> {
         return storage.memoList()
     }
     
