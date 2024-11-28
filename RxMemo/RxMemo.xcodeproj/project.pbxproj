@@ -36,6 +36,7 @@
 		785AEE1B2CF0E5290084B413 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE1A2CF0E5290084B413 /* Then */; };
 		785AEE1E2CF0E9240084B413 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE1D2CF0E9240084B413 /* NSObject-Rx */; };
 		785AEE212CF208890084B413 /* Action in Frameworks */ = {isa = PBXBuildFile; productRef = 785AEE202CF208890084B413 /* Action */; };
+		785AEE262CF8B0620084B413 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785AEE252CF8B0620084B413 /* CoreDataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		785AEE0E2CF0C7CE0084B413 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		785AEE102CF0C8E80084B413 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		785AEE122CF0CEF60084B413 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
+		785AEE252CF8B0620084B413 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				785AEDD92CECCA340084B413 /* RxMemo.xcdatamodeld */,
+				785AEE252CF8B0620084B413 /* CoreDataStorage.swift */,
 			);
 			path = CoreDataStorage;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				785AEE032CEE44DF0084B413 /* ListViewModel.swift in Sources */,
+				785AEE262CF8B0620084B413 /* CoreDataStorage.swift in Sources */,
 				785AEE012CEE3AA60084B413 /* ComposeViewController.swift in Sources */,
 				785AEE0D2CF0C3AA0084B413 /* Scene.swift in Sources */,
 				785AEDD52CECCA340084B413 /* ListViewController.swift in Sources */,
