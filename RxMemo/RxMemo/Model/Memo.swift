@@ -34,7 +34,7 @@ struct Memo: Equatable, IdentifiableType {
 
 // MARK: - Persistable
 
-extension Memo: Persistable {
+extension Memo {
     static var entityName: String {
         return "Memo"
     }
@@ -44,8 +44,8 @@ extension Memo: Persistable {
     }
     
     init(entity: NSManagedObject) {
-        content = entity.value(forKey: "content") as! String
-        insertDate = entity.value(forKey: "insertDate") as! Date
+        content = entity.value(forKey: "content") as? String ?? ""
+        insertDate = entity.value(forKey: "insertDate") as? Date ?? Date()
         identity = "\(insertDate.timeIntervalSinceReferenceDate)"
     }
     
