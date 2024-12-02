@@ -14,6 +14,15 @@ class CoreDataStorage: MemoStorageType {
     // MARK: - Properties
     
     let modelName: String
+    let entityName: String
+    
+    private var list: [Memo] {
+        return fetchMemo().map { Memo(entity: $0) }
+    }
+    
+    private lazy var sectionModel = MemoSectionModel(model: 0, items: list)
+    
+    private lazy var store = BehaviorSubject<[MemoSectionModel]>(value: [sectionModel])
     
     // MARK: - Core Data stack
 
@@ -34,13 +43,14 @@ class CoreDataStorage: MemoStorageType {
     }
     
     private var memoEntity: NSEntityDescription? {
-        return NSEntityDescription.entity(forEntityName: "Memo", in: mainContext)
+        return NSEntityDescription.entity(forEntityName: entityName, in: mainContext)
     }
     
     // MARK: - Lifecycle
     
-    init(modelName: String) {
+    init(modelName: String, entityName: String) {
         self.modelName = modelName
+        self.entityName = entityName
     }
     
     // MARK: - Helpers
@@ -55,6 +65,9 @@ class CoreDataStorage: MemoStorageType {
             managedObject.setValue(memo.insertDate, forKey: "insertDate")
             managedObject.setValue(memo.identity, forKey: "identity")
             saveContext()
+            
+            sectionModel.items.insert(memo, at: 0)
+            store.onNext([sectionModel])
         }
         
         return Observable.just(memo)
@@ -62,15 +75,7 @@ class CoreDataStorage: MemoStorageType {
     
     @discardableResult
     func memoList() -> RxSwift.Observable<[MemoSectionModel]> {
-        var list = [Memo]()
-        let memoResults = fetchMemo()
-        
-        for result in memoResults {
-            list.append(Memo(entity: result))
-        }
-        
-        return Observable.of(list)
-            .map { results in [MemoSectionModel(model: 0, items: results)]}
+        return store
     }
     
     @discardableResult
@@ -80,11 +85,16 @@ class CoreDataStorage: MemoStorageType {
         
         for result in results {
             if result.identity == updated.identity {
-                result.content = updated.content
+                updated.update(result)
             }
         }
         
-        saveContext()
+        if let index = sectionModel.items.firstIndex(where: { $0 == memo }) {
+            sectionModel.items.remove(at: index)
+            sectionModel.items.insert(updated, at: index)
+        }
+        
+        store.onNext([sectionModel])
         
         return Observable.just(updated)
     }
@@ -96,6 +106,12 @@ class CoreDataStorage: MemoStorageType {
         
         mainContext.delete(deleted)
         saveContext()
+        
+        if let index = sectionModel.items.firstIndex(where: { $0 == memo }) {
+            sectionModel.items.remove(at: index)
+        }
+        
+        store.onNext([sectionModel])
         
         return Observable.just(memo)
     }
@@ -114,7 +130,10 @@ class CoreDataStorage: MemoStorageType {
     private func fetchMemo() -> [MemoEntity] {
         do {
             let request = MemoEntity.fetchRequest()
+            let sortByDate = NSSortDescriptor(key: "insertDate", ascending: false)
+            request.sortDescriptors = [sortByDate]
             let results = try mainContext.fetch(request)
+            
             return results
         } catch {
             print(error.localizedDescription)

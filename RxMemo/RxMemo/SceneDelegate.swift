@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let coordinator = SceneCoordinator(window: window ?? UIWindow())
-        let storage = CoreDataStorage(modelName: "RxMemo")
+        let storage = CoreDataStorage(modelName: "RxMemo", entityName: "Memo")
         let listViewModel = ListViewModel(title: "나의 메모", sceneCoordinator: coordinator, storage: storage)
         let listScene = Scene.list(listViewModel)
         
