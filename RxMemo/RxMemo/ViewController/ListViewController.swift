@@ -32,6 +32,7 @@ class ListViewController: UIViewController, ViewModelBindableType {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.text = memo.content
+        content.textProperties.numberOfLines = 1
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         

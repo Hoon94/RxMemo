@@ -62,6 +62,29 @@ class ComposeViewController: UIViewController, ViewModelBindableType {
             .withLatestFrom(contentTextView.rx.text.orEmpty)
             .bind(to: viewModel.saveAction.inputs)
             .disposed(by: rx.disposeBag)
+        
+        let willShowObservable = NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue }
+            .map { $0.cgRectValue.height }
+        
+        let willHideObservable = NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+            .map { notification -> CGFloat in 0 }
+        
+        let keyboardObservable = Observable.merge(willShowObservable, willHideObservable)
+            .share()
+        
+        keyboardObservable
+            .withUnretained(contentTextView)
+            .subscribe(onNext: { textView, height in
+                var inset = textView.contentInset
+                inset.bottom = height
+                textView.contentInset = inset
+                
+                var scrollInset = textView.verticalScrollIndicatorInsets
+                scrollInset.bottom = height
+                textView.verticalScrollIndicatorInsets = scrollInset
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     private func configureLayout() {
