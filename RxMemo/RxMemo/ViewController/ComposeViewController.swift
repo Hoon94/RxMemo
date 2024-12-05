@@ -74,16 +74,13 @@ class ComposeViewController: UIViewController, ViewModelBindableType {
             .share()
         
         keyboardObservable
-            .withUnretained(contentTextView)
-            .subscribe(onNext: { textView, height in
-                var inset = textView.contentInset
-                inset.bottom = height
-                textView.contentInset = inset
-                
-                var scrollInset = textView.verticalScrollIndicatorInsets
-                scrollInset.bottom = height
-                textView.verticalScrollIndicatorInsets = scrollInset
-            })
+            .toContentInset(of: contentTextView)
+            .bind(to: contentTextView.rx.contentInset)
+            .disposed(by: rx.disposeBag)
+        
+        keyboardObservable
+            .toVerticalScrollIndicatorInsets(of: contentTextView)
+            .bind(to: contentTextView.rx.verticalScrollIndicatorInsets)
             .disposed(by: rx.disposeBag)
     }
     
@@ -94,6 +91,26 @@ class ComposeViewController: UIViewController, ViewModelBindableType {
         view.addSubview(contentTextView)
         contentTextView.snp.makeConstraints { make in
             make.directionalEdges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+}
+
+// MARK: - ObservableType
+
+extension ObservableType where Element == CGFloat {
+    func toContentInset(of textView: UITextView) -> Observable<UIEdgeInsets> {
+        return map { height in
+            var inset = textView.contentInset
+            inset.bottom = height
+            return inset
+        }
+    }
+    
+    func toVerticalScrollIndicatorInsets(of textView: UITextView) -> Observable<UIEdgeInsets> {
+        return map { height in
+            var scrollInset = textView.verticalScrollIndicatorInsets
+            scrollInset.bottom = height
+            return scrollInset
         }
     }
 }
